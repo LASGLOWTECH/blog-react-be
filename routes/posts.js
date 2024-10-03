@@ -1,12 +1,24 @@
 const express = require('express');
 
-const addPost =  require('../controllers/posts')
+const {
+    
+    getPosts,
+    getPost,
+    addPost,
+    deletePost,
+    updatePost
+} = require('../controllers/posts');
 
-const router= express.Router();
+const router = express.Router();
+router.get('/', getPosts)
+router.get('/:id', getPost)
 
+router.post("/",  addPost)
+router.put("/:id",  updatePost)
 
-router.get("/", addPost)
+router.delete("/:id",  deletePost)
 
+  
 
 module.exports = router
 
