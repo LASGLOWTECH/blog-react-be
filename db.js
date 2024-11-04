@@ -4,7 +4,17 @@ const mysql= require('mysql')
 const app = express();
 
 // SQL Server configuration
- const db = mysql.createConnection({
+//  const db = mysql.createConnection({
+//     host:"46.105.33.210", // Server IP address
+//     user:"urgroupc_austinosaz", // Database username
+//     password:"aQvX)Z)vvfNO", // Database password
+//     database:"urgroupc_myblog", // Database name
+    
+// connectTimeout: 1000
+
+// })
+
+const db = mysql.createConnection({
     host: "127.0.0.1", // Server IP address
     user: "root", // Database username
     password: "Austin$7", // Database password
@@ -13,9 +23,6 @@ const app = express();
     debug: "true"
 
 })
-
-
-
 // dotenv.config({ path: './.env'});
 
 // const app = express();

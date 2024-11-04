@@ -3,11 +3,10 @@ const cors = require('cors');
 const postRoutes = require('./routes/posts.js');
 const cookieParser = require("cookie-parser")
 const app = express()
+const multer=require ('multer')
 
-
+ 
 const authRoutes = require('./routes/auth.js');
-// const userRoutes = require('./routes/user.js');
-// respond with "hello world" when a GET request is made to the homepage
 
 app.use(cors({
     origin: 'http://localhost:5173', // Use your frontend's origin
@@ -18,6 +17,25 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser());
 
+const storage=multer.diskStorage({
+    destination: (req, file, cb)=>{
+cb(null, '../my-project/public/upload')},
+
+  filename:(req, file, cb)=>{
+   
+     cb(null,  Date.now() + file.originalname )   
+    },
+}) 
+console.log(storage);
+
+
+const upload= multer({storage})
+
+app.post('/api/upload', upload.single('file'), (req, res)=>{
+    const file= req.file
+res.status(200).json(file.filename)
+})
+   
 app.use("/api/posts", postRoutes)
 // app.use("/api/user", userRoutes)
 app.use("/api/auth", authRoutes)
